@@ -370,13 +370,13 @@ int build(char *in, char *out){
         strcat(file_path, "/");
     }
 #endif
-    strcat(file_path, "new-imgdata.img");
+    strcat(file_path, "imgdata.img");
 	O = fopen(file_path, "wb");
 	if (O == NULL){
 		printf("\nCould not create %s\n", file_path);
 		return -1;
 	}
-	printf("\nWriting new-imgdata.img...");
+	printf("\nWriting imgdata.img...");
 	fwrite(&IMGDATA_HEADER, sizeof(char), sizeof(IMGDATA_HEADER), O);	// Writes the header of the new imgdata.img file
 	fwrite(RAW_IMAGE_HEADERS, sizeof(raw_image_header)* 12, 1, O);	// Writes the image headers to imgdata
 	for (i = 0; i < 520; i++){	// Writes out 520 of 0x00 to get to the 0x400 offset
@@ -409,7 +409,7 @@ int build(char *in, char *out){
 		free(pixels[i].data);
 	}
 
-    printf("\nChecking new-imgdata.img size...");
+    printf("\nChecking imgdata.img size...");
 	O = fopen(file_path, "rb");
 	if (O == NULL){
 		printf("FAIL!\nCant open %s", file_path);
